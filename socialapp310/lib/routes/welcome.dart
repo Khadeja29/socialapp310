@@ -33,9 +33,6 @@ class _WelcomeState extends State<Welcome> {
                   ),
                   Column(
                     children: <Widget>[
-                      Container(
-                        height: 60.0,
-                        width: 400.0,
 
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(40),
@@ -103,14 +100,3 @@ class _WelcomeState extends State<Welcome> {
 
                           ),
                         ),
-                      ),
-                    ],
-                  )
-                ],
-              )
-
-          )
-      ),
-    );
-  }
-}

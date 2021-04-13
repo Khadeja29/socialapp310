@@ -16,7 +16,6 @@ void main() => runApp(MaterialApp(
     '/signupfinish': (context) => FinishSignupPage(),
 
     // '/': (context) => Welcome(),
-    // '/': (context) => Login(),
     // '/signup': (context) => SignUp(),
 
   } ,
