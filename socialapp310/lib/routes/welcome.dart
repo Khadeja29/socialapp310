@@ -17,8 +17,8 @@ class _WelcomeState extends State<Welcome> {
       resizeToAvoidBottomInset: false,
       body: SafeArea(
           child: Container(
-              //width: double.infinity,
-              //height: MediaQuery.of(context).size.height/3,
+            //width: double.infinity,
+            //height: MediaQuery.of(context).size.height/3,
               padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -33,6 +33,9 @@ class _WelcomeState extends State<Welcome> {
                   ),
                   Column(
                     children: <Widget>[
+                      Container(
+                        height: 60.0,
+                        width: 400.0,
 
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(40),
@@ -52,7 +55,7 @@ class _WelcomeState extends State<Welcome> {
                             child: Padding(
                               padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 30),
                               child: Text(
-                                'Login',
+                                  'Login',
                                   style:  TextStyle(
                                       color: AppColors.darkpurple,
                                       fontSize: 20.0,
@@ -100,3 +103,14 @@ class _WelcomeState extends State<Welcome> {
 
                           ),
                         ),
+                      ),
+                    ],
+                  )
+                ],
+              )
+
+          )
+      ),
+    );
+  }
+}
