@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:socialapp310/routes/welcome.dart';
 import 'package:socialapp310/utils/color.dart';
 import 'package:socialapp310/utils/styles.dart';
 import 'package:socialapp310/routes/splashpage.dart';
 import 'package:socialapp310/routes/login.dart';
 
-void main() {
-  runApp(MaterialApp(
-    home: WalkThrough(),
-  ));
-}
+
 
 class WalkThrough extends StatefulWidget {
   @override
@@ -19,7 +16,7 @@ class _WalkThroughState extends State {
 
   int currentPage = 1;
   int totalPages = 6;
-  List <String> AppbarTitles = ["Welcome", "Intro", "Profiles" , "Posts", "Following" , "Messages"];
+  List <String> AppbarTitles = ["Hello", "Intro", "Profiles" , "Posts", "Following" , "Messages"];
   List <String> PageTitles = ["Woof", "Sign Up", "Create your profile" , "Create and Share Posts" , "Follow Other People" , "Message Your Friends"];
   List <String> imageURLs = ["assets/images/logo_woof.png", "assets/images/authentication.png", "assets/images/success.png" , "assets/images/connectionwith.png","assets/images/Connected.png","assets/images/Social_networking.png"];
   List <String> imageCaptions = ["An app fit for kings and queens", "An easy sign up process", "Personalize your Image and Bio!" ,"Share your life" ,"Connect with fellow wolves", "Stay connected  "];
@@ -30,7 +27,7 @@ class _WalkThroughState extends State {
     setState(() {
       if(currentPage == totalPages )
       {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => Login()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => Welcome()));
       }
       if(currentPage < totalPages)
       {currentPage ++ ;}
@@ -89,6 +86,7 @@ class _WalkThroughState extends State {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
               children:<Widget> [
                 OutlinedButton(
                   onPressed: prevPage,
