@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:socialapp310/postClass/postCard.dart';
 import 'package:socialapp310/utils/color.dart';
 import 'package:socialapp310/utils/styles.dart';
-import 'package:socialapp310/postCard.dart';
-import 'package:socialapp310/post.dart';
+import 'package:socialapp310/postClass/post.dart';
+
 
 class HomeFeed extends StatefulWidget {
   @override
@@ -10,9 +11,9 @@ class HomeFeed extends StatefulWidget {
 }
 //to connect to main use Function '/someroutename': (context) => HomeFeed(),
 class _TestPostState extends State {
-
   Post post = Post(username: "Generic Name",location: "Some Location", likes: 100, ImageUrlAvatar: "assets/Dog/cutegolden.jpg", reposts: 20,
     ImageUrlPost: "assets/Dog/index.jpg", caption: "This is a generic sentence.This is a generic sentence.This is a generic sentence.", date: "April 17 2021", comments: 100);
+
   List<Post> posts = [Post(username: "Generic Name",location: "Some Location", likes: 15, ImageUrlAvatar: "assets/Dog/another.jpg", reposts: 20,
   ImageUrlPost: "assets/Dog/scenicgolden.jpg", caption: "This is a generic sentence.This is a generic sentence.This is a generic sentence.", date: "April 17 2021", comments: 20),
   Post(username: "Generic Name",location: "Some Location", likes: 100, ImageUrlAvatar: "assets/Dog/last.jpg", reposts: 58,
@@ -29,7 +30,9 @@ class _TestPostState extends State {
     setState(() {
      print(index);
       _selectedIndex = index;//TODO: if index 0 nothing happens, if index 1 push search page, if index 2 push create page,
-      //TODO: if index 3 push notif page, if index 4 push profile page
+      if (_selectedIndex == 1){
+        Navigator.pushNamed(context, '/search');
+      }//TODO: if index 3 push notif page, if index 4 push profile page
     });
   }
 

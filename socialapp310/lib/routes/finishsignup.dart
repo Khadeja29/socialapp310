@@ -157,7 +157,7 @@ class _FinishSignupPageState extends State<FinishSignupPage> {
                       backgroundColor: AppColors.darkpurple,
                     ),
                     onPressed: () {
-                      Navigator.pushNamed(context, '/home');
+                      Navigator.pushNamed(context, '/homefeed');
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 30),
