@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:socialapp310/routes/walkthrough.dart';
 import 'package:socialapp310/utils/color.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
-
 class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 4), () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => WalkThrough()))); //TODO:ADD CONTEXT TO ONBOARDING SCREENS
+    Timer(Duration(seconds: 1), () => Navigator.pushNamed(context, "/profilepage"));
   }
   @override
   Widget build(BuildContext context) {
@@ -66,7 +64,6 @@ class _SplashScreenState extends State<SplashScreen> {
                       children: [
                         Text( "All your pals under one roof!",
                           style: TextStyle(
-                            //fontFamily: 'OpenSansCondensed',
                             fontSize: 20.0,
                             fontWeight: FontWeight.w600,
                             color: AppColors.darkgreyblack,
@@ -74,7 +71,6 @@ class _SplashScreenState extends State<SplashScreen> {
                         ),
                         Text( "Stay Connected",
                           style: TextStyle(
-                            //fontFamily: 'OpenSansCondensed',
                             fontSize: 18.0,
                             fontWeight: FontWeight.w500,
                             color: AppColors.peachpink,
@@ -92,4 +88,3 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
-
