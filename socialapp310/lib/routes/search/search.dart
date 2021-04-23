@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:socialapp310/postClass/post.dart';
-import 'package:socialapp310/postClass/postList.dart';
+import 'package:socialapp310/models/post.dart';
 import 'package:socialapp310/routes/search/searchTabs.dart';
 import 'package:socialapp310/routes/search/searchWidget.dart';
 import 'package:socialapp310/utils/color.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class Search extends StatefulWidget {
   @override
@@ -11,7 +11,7 @@ class Search extends StatefulWidget {
 }
 
 class searchState extends State<Search> {
-  List<Post> post_list = posts;
+  List<Post> post_list = [];
   int choiceIdx;
   String query = '';
 
@@ -24,6 +24,25 @@ class searchState extends State<Search> {
     choiceIdx = 0;
   }
 
+  int _selectedIndex = 1;
+  void _onItemTapped(int index) {
+    setState(() {
+      print(index);
+      _selectedIndex = index;//TODO: if index 0 nothing happens, if index 1 push search page, if index 2 push create page,
+      if (_selectedIndex == 0){
+        Navigator.pushNamed(context, '/homefeed');
+      }
+      else if (_selectedIndex == 1){
+        Navigator.pushNamed(context, '/search');
+      }
+      else if (_selectedIndex == 1){
+        Navigator.pushNamed(context, '/search');
+      }
+      else if (_selectedIndex == 1){
+        Navigator.pushNamed(context, '/search');
+      }//TODO: if index 3 push notif page, if index 4 push profile page
+    });
+  }
   @override
   Widget build(BuildContext context) => MaterialApp(
     home: DefaultTabController(
@@ -36,7 +55,7 @@ class searchState extends State<Search> {
             child: new SafeArea(
               child: Column(
                 children: <Widget>[
-                  buildSearch(),
+                    buildSearch(),
                   new TabBar(
                     isScrollable: true,
                     tabs: choices.map<Widget>((Choice choice){
@@ -56,24 +75,31 @@ class searchState extends State<Search> {
           ),
         ),
         body: TabBarView(
-              children: choices.map((Choice choice){
-                return Column(
-                  children: <Widget>[
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: post_list.length,
-                        itemBuilder: (context, index) {
-                          final product = post_list[index];
-                          final choiceIdx = choice.index;
-                          return buildProduct(product);
-                        },
-                      ),
-                    ),
-                  ],
-                );
-              }
-              ).toList(),
+              children: [
+                userSearchDisplay(),
+                locationSearchDisplay(),
+                postsSearchDisplay(),
+              ]
             ),
+        bottomNavigationBar: BottomNavigationBar(
+          iconSize: 30,
+          backgroundColor: AppColors.darkpurple,
+          selectedItemColor: AppColors.peachpink,
+          unselectedItemColor: Colors.white,
+          type: BottomNavigationBarType.fixed,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          items: [
+            BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: "Home"),
+            BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
+            BottomNavigationBarItem(icon: Icon(Icons.add),label: "Create"),
+            BottomNavigationBarItem(icon: Icon(Icons.favorite_border_outlined), label: "Notifications"),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+          ],
+          currentIndex: _selectedIndex,
+
+          onTap: _onItemTapped,
+        ),
       ),
     ),
 
@@ -85,40 +111,110 @@ class searchState extends State<Search> {
     onChanged: searchProduct,
   );
 
-  Widget buildProduct(Post post) => ListTile(
+  Widget buildProductUser(Post post) => ListTile(
     leading: Image(
-      image: AssetImage(post.ImageUrlPost),
+      image: AssetImage(post.ImageUrlAvatar),
       fit: BoxFit.cover,
       width: 50,
       height: 50,
     ),
-    title: Text(post.caption),
+    title: Text(post.username),
   );
 
-  void searchProduct(String query) {
-    final postsAll = posts.where((post) {
-      if (choiceIdx == 0){
-        final titleLower = post.username.toLowerCase();
+  Widget userSearchDisplay(){
+    return ListView.builder(
+      itemCount: post_list.length,
+      // ignore: missing_return
+      itemBuilder: (context, index) {
+        //final choiceIdx = choice.index;
+        if (choiceIdx == 0){
+          if (post_list[index].username.toLowerCase().contains(query.toLowerCase())){
+            final product = post_list[index];
+            return buildProductUser(product);
+          }else
+            return Container();
+        }
+      },
+    );
+  }
+
+  Widget locationSearchDisplay(){
+    return ListView.builder(
+      itemCount: post_list.length,
+      // ignore: missing_return
+      itemBuilder: (context, index) {
+        //final choiceIdx = choice.index;
+        if (choiceIdx == 0){
+          if (post_list[index].username.toLowerCase().contains(query.toLowerCase())){
+            final product = post_list[index];
+            return buildProductUser(product);
+          }else
+            return Container();
+        }
+      },
+    );
+  }
+
+  Widget postsSearchDisplay () {
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          StaggeredGridView.countBuilder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            crossAxisCount: 3,
+            itemCount: post_list.length,
+            staggeredTileBuilder: (index) => StaggeredTile.count(1 , 1 ),
+            itemBuilder: (context, index) {
+              if (post_list.elementAt(index).caption.toLowerCase().contains(query.toLowerCase())){
+                return Container(
+                  padding:  EdgeInsets.all(0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(0),
+                    child: Image(
+                      fit: BoxFit.cover,
+                      image:
+                      AssetImage(post_list.elementAt(index).ImageUrlPost),
+                    ),
+                  ),
+                );
+              }else
+              return Container();
+            },
+            crossAxisSpacing: 2,
+            mainAxisSpacing: 2,
+          ),
+        ],
+      ),
+    );
+  }
+
+  void searchProduct(String query){
+
+    if (query.length == 0){
+      print(query.length);
+      final postsAll = [];
+      setState(() {
+        this.query = query;
+        this.post_list = postsAll;
+      });
+    }else{
+      final postsAll = posts.where((post) {
+        final usernameLower = post.username.toLowerCase();
+        final locationLower = post.location.toLowerCase();
+        final postsLower = post.caption.toLowerCase();
         final searchLower = query.toLowerCase();
+        return usernameLower.contains(searchLower) ||
+            locationLower.contains(searchLower) || postsLower.contains(searchLower);
+      }).toList();
 
-        return titleLower.contains(searchLower);
-      }else if (choiceIdx == 1){
-        final titleLower = post.location.toLowerCase();
-        final searchLower = query.toLowerCase();
-
-        return titleLower.contains(searchLower);
-      }else{
-        final titleLower = post.caption.toLowerCase();
-        final searchLower = query.toLowerCase();
-
-        return titleLower.contains(searchLower);
-      }
-
-    }).toList();
-
-    setState(() {
-      this.query = query;
-      this.post_list = postsAll;
-    });
+      setState(() {
+        this.query = query;
+        this.post_list = postsAll;
+      });
+    }
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:socialapp310/postClass/postCard.dart';
+import 'package:socialapp310/routes/homefeed/postCard.dart';
 import 'package:socialapp310/utils/color.dart';
 import 'package:socialapp310/utils/styles.dart';
-import 'package:socialapp310/postClass/post.dart';
+import 'package:socialapp310/models/post.dart';
 
 
 class HomeFeed extends StatefulWidget {

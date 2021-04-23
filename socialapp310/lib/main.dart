@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:socialapp310/routes/HomeFeed.dart';
+import 'package:socialapp310/routes/homefeed/HomeFeed.dart';
 import 'package:socialapp310/routes/finishsignup.dart';
 import 'package:socialapp310/routes/search/search.dart';
 import 'package:socialapp310/routes/signup.dart';

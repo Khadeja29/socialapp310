@@ -11,5 +11,5 @@ class Choice{
 const List<Choice> choices = <Choice>[
   Choice(title: 'users', icon: Icons.person, index: 0),
   Choice(title: 'location', icon: Icons.location_city, index: 1),
-  Choice(title: 'captions', icon: Icons.picture_in_picture, index: 2),
+  Choice(title: 'posts', icon: Icons.picture_in_picture, index: 2),
 ];
