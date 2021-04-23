@@ -27,7 +27,7 @@ class _TestPostState extends State {
   int _selectedIndex = 0;
   void _onItemTapped(int index) {
     setState(() {
-     print(index);
+
       _selectedIndex = index;//TODO: if index 0 nothing happens, if index 1 push search page, if index 2 push create page,
       //TODO: if index 3 push notif page, if index 4 push profile page
     });
@@ -60,6 +60,7 @@ class _TestPostState extends State {
 
       body: ListView(
         children: posts.map((post) => PostCard(post: post)).toList(),
+
       ),
       bottomNavigationBar: BottomNavigationBar(
         iconSize: 30,

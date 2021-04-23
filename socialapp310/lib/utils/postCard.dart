@@ -99,9 +99,7 @@ class _PostCardState extends State<PostCard> {
                     tag: '${widget.post.ImageUrlPost}',
                     child: Image(
                       image: AssetImage(widget.post.ImageUrlPost) ,
-
                     ),
-
                   ),
                   onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (_) {
@@ -228,7 +226,7 @@ class DetailScreen extends StatelessWidget {
             child: InteractiveViewer(
               clipBehavior: Clip.none,
               panEnabled: true, // Set it to false
-              boundaryMargin: EdgeInsets.all(30),
+              boundaryMargin: EdgeInsets.all(60),
               minScale: 0.33,
               maxScale: 3,
               child: Image(
