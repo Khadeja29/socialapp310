@@ -220,7 +220,8 @@ class _LoginState extends State<Login> {
                                   style: OutlinedButton.styleFrom(
                                       backgroundColor: AppColors.primarypurple,
                                     ),
-                                  onPressed: () {Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => HomeFeed()));},
+                                  onPressed: () {Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => HomeFeed()),
+                                        (Route<dynamic> route) => false);},
                                   child: Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 12.0),
                                 child: Text(

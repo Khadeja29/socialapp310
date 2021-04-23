@@ -158,7 +158,8 @@ class _FinishSignupPageState extends State<FinishSignupPage> {
                       backgroundColor: AppColors.darkpurple,
                     ),
                     onPressed: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => HomeFeed()));
+                      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => HomeFeed()),
+                              (Route<dynamic> route) => false);
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 30),
