@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:socialapp310/utils/color.dart';
 import 'package:socialapp310/utils/styles.dart';
 import 'package:socialapp310/utils/dimension.dart';
+import 'package:socialapp310/routes/HomeFeed.dart';
 
 class SettingsUI extends StatelessWidget {
   @override
@@ -157,7 +158,7 @@ class _FinishSignupPageState extends State<FinishSignupPage> {
                       backgroundColor: AppColors.darkpurple,
                     ),
                     onPressed: () {
-                      Navigator.pushNamed(context, '/home');
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => HomeFeed()));
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 30),
