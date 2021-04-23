@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:socialapp310/utils/color.dart';
 import 'package:flutter/material.dart';
-import 'post.dart';
+import '../../models/post.dart';
 import 'package:flutter/gestures.dart';
 
 class PostCard extends StatefulWidget {
@@ -209,7 +209,7 @@ class DetailScreen extends StatelessWidget {
 
   DetailScreen({  this.ImageUrlPost });
   Matrix4 initialScale = Matrix4(1 , 0 ,0 ,0,
-                                0, 1.0 , 0, 0,
+                                  0, 1.0 , 0, 0,
                                 0, 0, 1, 0,
                                 0 ,0 ,0 ,1);
   TransformationController _transformationController = TransformationController();

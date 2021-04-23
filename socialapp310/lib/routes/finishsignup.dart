@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:socialapp310/utils/color.dart';
 import 'package:socialapp310/utils/styles.dart';
 import 'package:socialapp310/utils/dimension.dart';
-import 'package:socialapp310/routes/HomeFeed.dart';
+import 'package:socialapp310/routes/homefeed/HomeFeed.dart';
 
 class SettingsUI extends StatelessWidget {
   @override
