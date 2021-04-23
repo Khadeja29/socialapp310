@@ -7,6 +7,7 @@ import 'package:socialapp310/utils/styles.dart';
 import 'package:socialapp310/utils/dimension.dart';
 import 'package:http/http.dart' as http;
 
+
 class SignUp extends StatefulWidget {
   @override
   _SignUpState createState() => _SignUpState();
