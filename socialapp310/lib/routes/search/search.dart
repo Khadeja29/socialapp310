@@ -35,11 +35,11 @@ class searchState extends State<Search> {
       else if (_selectedIndex == 1){
         Navigator.pushNamed(context, '/search');
       }
-      else if (_selectedIndex == 1){
-        Navigator.pushNamed(context, '/search');
+      else if (_selectedIndex == 3){
+        Navigator.pushNamed(context, '/notifications');
       }
-      else if (_selectedIndex == 1){
-        Navigator.pushNamed(context, '/search');
+      else if (_selectedIndex == 4){
+        Navigator.pushNamed(context, '/profile');
       }//TODO: if index 3 push notif page, if index 4 push profile page
     });
   }
