@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:socialapp310/models/notifications.dart';
+import 'package:socialapp310/routes/homefeed/HomeFeed.dart';
 import 'package:socialapp310/routes/notifications/activity_app_bar.dart';
 import 'package:socialapp310/routes/notifications/activity_tile.dart';
 import 'package:socialapp310/utils/color.dart';
@@ -14,17 +15,18 @@ class ActivityScreen extends StatefulWidget {
 }
 
 class _ActivityScreenState extends State<ActivityScreen> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 3;//notif page initial index is 3
   void _onItemTapped(int index) {
     setState(() {
       print(index);
       _selectedIndex = index;
-      if(index == 3) {
-        Navigator.pushNamed(context, '/notifications');
+      if(index == 0) {
+        Navigator.of(context).pushReplacement(
+            new MaterialPageRoute(builder: (context) => new HomeFeed()));
       }
 
-      //TODO: if index 0 nothing happens, if index 1 push search page, if index 2 push create page,
-      //TODO: if index 3 push notif page, if index 4 push profile page
+      //TODO: if index 0 push homepage, if index 1 push search page, if index 2 push create page,
+      //TODO: if index 3 nothing happens, if index 4 push profile page
     });
   }
   @override
