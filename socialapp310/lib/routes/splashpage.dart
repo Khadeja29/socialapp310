@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:socialapp310/routes/profile/profilepage.dart';
 import 'package:socialapp310/routes/walkthrough.dart';
 import 'dart:async';
 import 'package:socialapp310/utils/color.dart';
@@ -16,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
     print(_seen);
     if (_seen) {
       Navigator.of(context).pushReplacement(
-          new MaterialPageRoute(builder: (context) => new Welcome()));
+          new MaterialPageRoute(builder: (context) => new ProfileScreen()));
     } else {
       await prefs.setBool('_seen', true);
       Navigator.of(context).pushReplacement(

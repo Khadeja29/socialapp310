@@ -38,7 +38,7 @@ Widget profileStats({Size screen, Color color, int post , int followers , int fo
   );
 }
 
-Widget bio({@required String name}) {
+Widget bio({@required String name, @required String biodata}) {
   return Container(
     color: Colors.white,
     height: 100,
@@ -62,7 +62,7 @@ Widget bio({@required String name}) {
             children: [
               TextSpan(
                 text:
-                'This is my generic doggo bio.Welcome to my life!" ',
+                 biodata,
                 style: TextStyle(
                   color: AppColors.darkgreyblack,
                   fontWeight: FontWeight.bold,
