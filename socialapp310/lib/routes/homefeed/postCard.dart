@@ -246,9 +246,11 @@ class DetailScreen extends StatelessWidget {
         ),
 
     ),
-        onTap: () {
-      Navigator.pop(context);
-    },
+      onTap: (){
+        Navigator.pop(context);
+      },
+
+
     );
   }
 }
