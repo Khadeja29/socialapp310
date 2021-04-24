@@ -1,17 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:socialapp310/routes/walkthrough.dart';
 import 'dart:async';
 import 'package:socialapp310/utils/color.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:socialapp310/routes/welcome.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 class _SplashScreenState extends State<SplashScreen> {
+  Future checkFirstSeen() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool _seen = (prefs.getBool('_seen') ?? false);
+    print(_seen);
+    if (_seen) {
+      Navigator.of(context).pushReplacement(
+          new MaterialPageRoute(builder: (context) => new Welcome()));
+    } else {
+      await prefs.setBool('_seen', true);
+      Navigator.of(context).pushReplacement(
+          new MaterialPageRoute(builder: (context) => new WalkThrough()));
+    }
+  }
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 1), () => Navigator.pushNamed(context, "/profilepage"));
+
+    Timer(Duration(seconds: 4), () => checkFirstSeen()); //TODO:ADD CONTEXT TO ONBOARDING SCREENS
+
   }
   @override
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(

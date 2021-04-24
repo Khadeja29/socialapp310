@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:socialapp310/models/post.dart';
-
-
 import 'package:socialapp310/routes/profile/appBar.dart';
 import 'package:socialapp310/routes/profile/my_flutter_app_icons.dart';
 import 'package:socialapp310/routes/profile/profilewidget.dart';

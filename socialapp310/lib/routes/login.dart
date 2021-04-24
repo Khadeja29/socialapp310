@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:socialapp310/utils/color.dart';
 import 'package:socialapp310/utils/styles.dart';
 import 'package:socialapp310/utils/dimension.dart';
-
+import 'package:socialapp310/routes/homefeed/HomeFeed.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -220,7 +220,7 @@ class _LoginState extends State<Login> {
                                   style: OutlinedButton.styleFrom(
                                       backgroundColor: AppColors.primarypurple,
                                     ),
-                                  onPressed: () {},
+                                  onPressed: () {Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => HomeFeed()));},
                                   child: Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 12.0),
                                 child: Text(

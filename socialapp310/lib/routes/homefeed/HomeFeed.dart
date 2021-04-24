@@ -5,15 +5,12 @@ import 'package:socialapp310/utils/color.dart';
 import 'package:socialapp310/utils/styles.dart';
 
 
-
-
 class HomeFeed extends StatefulWidget {
   @override
   _TestPostState createState() => _TestPostState();
 }
 //to connect to main use Function '/someroutename': (context) => HomeFeed(),
 class _TestPostState extends State {
-
 
   int _selectedIndex = 0;
   void _onItemTapped(int index) {
