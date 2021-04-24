@@ -69,7 +69,7 @@ class _PostCardState extends State<PostCard> {
                                 ),
                                 RichText(
                                   text: TextSpan(
-                                  text: "${widget.post.location}",
+                                  text: "${widget.post.loc.loc_name}",
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () => print('Click on location'),//TODO: Push user profile
                                   style: TextStyle(
