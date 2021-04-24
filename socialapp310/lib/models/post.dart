@@ -1,3 +1,4 @@
+
 class Post {
   String username;
   String location;
@@ -11,8 +12,6 @@ class Post {
 
   Post({ this.username, this.date, this.likes, this.comments, this.ImageUrlAvatar, this.ImageUrlPost, this.caption, this.location , this.reposts});
 }
-
-
 Post post = Post(username: "Generic Name",location: "Some Location", likes: 100, ImageUrlAvatar: "assets/Dog/cutegolden.jpg", reposts: 20,
     ImageUrlPost: "assets/Dog/index.jpg", caption: "This is a generic sentence.This is a generic sentence.This is a generic sentence.", date: "April 17 2021", comments: 100);
 List<Post> posts = [Post(username: "Generic Name",location: "Some Location", likes: 15, ImageUrlAvatar: "assets/Dog/another.jpg", reposts: 20,
