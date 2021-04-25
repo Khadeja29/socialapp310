@@ -28,6 +28,15 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
   TabController _controller;
   String _biodata =profuser.bio;
 
+  int _selectedIndex = 0;
+  void _onItemTapped(int index) {
+    setState(() {
+      print(index);
+      _selectedIndex = index;//TODO: if index 0 nothing happens, if index 1 push search page, if index 2 push create page,
+      //TODO: if index 3 push notif page, if index 4 push profile page
+    });
+  }
+
 
   @override
   void initState() {
@@ -73,7 +82,7 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
           ),
           onPressed: () {},
         ),
-        profileStats: profileStats(screen: _screen, color: Colors.white, post: _postnum, followers: _followers, following: _following),
+        profileStats: profileStats(screen: _screen, color: Colors.white, post: _postnum, followers: _followers, following: _following, context: context),
         bio: bio(name: _name, biodata:_biodata),
         tabbar: TabBar(
           unselectedLabelColor: Colors.white,
@@ -104,6 +113,25 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
 
         ],
         controller: _controller,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        iconSize: 30,
+        backgroundColor: AppColors.darkpurple,
+        selectedItemColor: AppColors.peachpink,
+        unselectedItemColor: Colors.white,
+        type: BottomNavigationBarType.fixed,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
+          BottomNavigationBarItem(icon: Icon(Icons.add),label: "Create"),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite_border_outlined), label: "Notifications"),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+        ],
+        currentIndex: _selectedIndex,
+
+        onTap: _onItemTapped,
       ),
     );
   }
@@ -142,9 +170,6 @@ Widget mediagrid_display () {
         ),
       );
 }
-
-
-
   Widget buildTripCard(BuildContext context, int index) {
     final loc = profuser.locations[index];
     return new Container(
