@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:socialapp310/routes/finishsignup.dart';
 import 'package:socialapp310/routes/homefeed/HomeFeed.dart';
-
 import 'package:socialapp310/routes/notifications/notifications.dart';
 import 'package:socialapp310/routes/profile/profilepage.dart';
 

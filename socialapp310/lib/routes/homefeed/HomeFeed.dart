@@ -3,6 +3,7 @@ import 'package:socialapp310/models/post.dart';
 import 'package:socialapp310/routes/homefeed/postCard.dart';
 import 'package:socialapp310/utils/color.dart';
 import 'package:socialapp310/utils/styles.dart';
+import 'package:socialapp310/routes/notifications/notifications.dart';
 
 
 class HomeFeed extends StatefulWidget {
@@ -15,7 +16,10 @@ class _TestPostState extends State {
   int _selectedIndex = 0;
   void _onItemTapped(int index) {
     setState(() {
-     print(index);
+      if(index == 3) {
+        Navigator.of(context).pushReplacement(
+            new MaterialPageRoute(builder: (context) => new ActivityScreen()));
+      }
       _selectedIndex = index;//TODO: if index 0 nothing happens, if index 1 push search page, if index 2 push create page,
       //TODO: if index 3 push notif page, if index 4 push profile page
     });
@@ -48,6 +52,7 @@ class _TestPostState extends State {
 
       body: ListView(
         children: posts.map((post) => PostCard(post: post)).toList(),
+
       ),
       bottomNavigationBar: BottomNavigationBar(
         iconSize: 30,
