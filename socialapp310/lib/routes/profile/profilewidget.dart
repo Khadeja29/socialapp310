@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:socialapp310/models/post.dart';
+import 'package:socialapp310/models/user.dart';
+import 'package:socialapp310/routes/homefeed/postCard.dart';
 
 import 'package:socialapp310/utils/color.dart';
 
-Widget profileStats({Size screen, Color color, int post , int followers , int following}) {
+Widget profileStats({Size screen, Color color, @required  post , @required  int followers , @required int following, @required BuildContext context}) {
   return Container(
     padding: const EdgeInsets.only(left: 10, right: 10),
     color: color,
@@ -18,6 +19,7 @@ Widget profileStats({Size screen, Color color, int post , int followers , int fo
             child: profileAvatar(
               height: 100,
               width: 100,
+              context: context,
             ),
           ),
         ),
@@ -38,7 +40,7 @@ Widget profileStats({Size screen, Color color, int post , int followers , int fo
   );
 }
 
-Widget bio({@required String name}) {
+Widget bio({@required String name, @required String biodata}) {
   return Container(
     color: Colors.white,
     height: 100,
@@ -62,7 +64,7 @@ Widget bio({@required String name}) {
             children: [
               TextSpan(
                 text:
-                'This is my generic doggo bio.Welcome to my life!" ',
+                 biodata,
                 style: TextStyle(
                   color: AppColors.darkgreyblack,
                   fontWeight: FontWeight.bold,
@@ -105,6 +107,7 @@ Widget statsBox({
 Widget profileAvatar({
   @required double height,
   @required double width,
+  @required BuildContext context,
 }) {
   return Container(
     height: height,
@@ -117,9 +120,19 @@ Widget profileAvatar({
             color: Colors.white,
             shape: BoxShape.circle,
           ),
-          child: CircleAvatar(
-            backgroundImage: AssetImage(post.ImageUrlAvatar),
-            radius: 90,
+          child: GestureDetector(
+            child: Hero(
+              tag: '${profuser.imageUrlAvatar}',
+              child: CircleAvatar(
+                backgroundImage: AssetImage(profuser.imageUrlAvatar),
+                radius: 90,
+              ),
+            ),
+            onTap: (){
+              Navigator.push(context,MaterialPageRoute(builder: (_) {
+                return DetailScreen(ImageUrlPost: profuser.imageUrlAvatar,);
+              }));
+            },
           ),
         ),
       ),
