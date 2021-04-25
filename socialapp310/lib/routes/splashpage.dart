@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
+import 'package:socialapp310/routes/profile/profilepage.dart';
 import 'package:socialapp310/routes/walkthrough.dart';
+import 'dart:async';
 import 'package:socialapp310/utils/color.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:socialapp310/routes/welcome.dart';
@@ -9,7 +10,6 @@ class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
-
 class _SplashScreenState extends State<SplashScreen> {
   Future checkFirstSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
     print(_seen);
     if (_seen) {
       Navigator.of(context).pushReplacement(
-          new MaterialPageRoute(builder: (context) => new Welcome()));
+          new MaterialPageRoute(builder: (context) => new ProfileScreen()));
     } else {
       await prefs.setBool('_seen', true);
       Navigator.of(context).pushReplacement(
@@ -26,7 +26,9 @@ class _SplashScreenState extends State<SplashScreen> {
   }
   void initState() {
     super.initState();
+
     Timer(Duration(seconds: 4), () => checkFirstSeen()); //TODO:ADD CONTEXT TO ONBOARDING SCREENS
+
   }
   @override
 
@@ -82,7 +84,6 @@ class _SplashScreenState extends State<SplashScreen> {
                       children: [
                         Text( "All your pals under one roof!",
                           style: TextStyle(
-                            //fontFamily: 'OpenSansCondensed',
                             fontSize: 20.0,
                             fontWeight: FontWeight.w600,
                             color: AppColors.darkgreyblack,
@@ -90,7 +91,6 @@ class _SplashScreenState extends State<SplashScreen> {
                         ),
                         Text( "Stay Connected",
                           style: TextStyle(
-                            //fontFamily: 'OpenSansCondensed',
                             fontSize: 18.0,
                             fontWeight: FontWeight.w500,
                             color: AppColors.peachpink,
@@ -108,4 +108,3 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
-

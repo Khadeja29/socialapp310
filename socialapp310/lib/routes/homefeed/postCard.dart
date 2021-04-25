@@ -81,6 +81,30 @@ class _PostCardState extends State<PostCard> {
                                 ),
                               ),
                             ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Row(
+                              children: <Widget>[
+                                Icon(
+                                  Icons.location_on_rounded,
+                                  size: 17.0,
+                                  color: Colors.redAccent,
+                                ),
+                                RichText(
+                                  text: TextSpan(
+                                  text: "${widget.post.loc.loc_name}",
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () => print('Click on location'),//TODO: Push user profile
+                                  style: TextStyle(
+                                      color: Colors.lightBlue,
+                                      fontSize: 13.0,
+                                      fontWeight: FontWeight.w400,
+                                      letterSpacing: -0.4,
+                                      fontFamily: 'OpenSansCondensed-Bold'
+                                  ),
+                                  ),
+                                ),
 
                           ],
                         ),
