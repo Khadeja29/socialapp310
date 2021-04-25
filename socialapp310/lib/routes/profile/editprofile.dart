@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:socialapp310/utils/color.dart';
-import 'package:socialapp310/utils/styles.dart';
-import 'package:socialapp310/utils/dimension.dart';
-import 'package:socialapp310/models/user.dart';
+import 'package:socialapp310/routes/profile/appBar.dart';
+import 'profilepage.dart';
 
 class EditProfilePage extends StatefulWidget {
   @override
@@ -10,9 +9,25 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
-  String _username = profuser.username;
-  String _bio = profuser.bio;
-
+  bool showPassword = false;
+  bool private = false;
+  int _pageIndex = 0;
+  int _selectedIndex = 4;
+  void _onItemTapped(int index) {
+    setState(() {
+      print(index);
+      _selectedIndex = index;//TODO: if index 0 nothing happens, if index 1 push search page, if index 2 push create page,
+      if (_selectedIndex == 0) {
+        Navigator.pushReplacementNamed(context, '/homefeed');
+      } else if (_selectedIndex == 1) {
+        Navigator.pushReplacementNamed(context, '/search');
+      } else if (_selectedIndex == 3) {
+        Navigator.pushReplacementNamed(context, '/notifications');
+      } else if (_selectedIndex == 4) {
+        Navigator.pushReplacementNamed(context, '/profile');
+      } //TODO: if index 3 push notif page, if index 4 push profile page
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,10 +37,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.purple,
+            color: AppColors.darkpurple,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (BuildContext context) => ProfileScreen()));
+          },
         ),
+
       ),
       body: Container(
         padding: EdgeInsets.only(left: 16, top: 25, right: 16),
@@ -63,7 +82,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           image: DecorationImage(
                               fit: BoxFit.cover,
                               image: NetworkImage(
-                                "https://images.pexels.com/photos/3307758/pexels-photo-3307758.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250",
+                                "https://pbs.twimg.com/profile_images/1306087157086339075/DUEIvfCg_400x400.jpg",
                               ))),
                     ),
                     Positioned(
@@ -78,7 +97,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               width: 4,
                               color: Theme.of(context).scaffoldBackgroundColor,
                             ),
-                            color: Colors.purple,
+                            color: AppColors.darkpurple,
                           ),
                           child: Icon(
                             Icons.edit,
@@ -91,8 +110,24 @@ class _EditProfilePageState extends State<EditProfilePage> {
               SizedBox(
                 height: 35,
               ),
-              buildTextField("Username", _username),
-              buildTextField("Bio", _bio),
+              buildTextField("Username", "@doggo", false),
+              buildTextField("Full name", "Generic Name", false),
+              buildTextField("Bio", "This is a generic sentence. This is a generic sentence. This is a generic sentence doggo bio.", false),
+              Row(
+                children: [
+                  Checkbox(
+                    value: private,
+                    activeColor: AppColors.darkgrey,
+                    onChanged: (value) {
+                      setState(() {
+                        private = value;
+                      });
+                    },
+                  ),
+                  Text("Make account private"),
+                  Spacer()
+                ],
+              ),
               SizedBox(
                 height: 35,
               ),
@@ -112,7 +147,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   ),
                   RaisedButton(
                     onPressed: () {},
-                    color: Colors.purple,
+                    color: AppColors.darkpurple,
                     padding: EdgeInsets.symmetric(horizontal: 50),
                     elevation: 2,
                     shape: RoundedRectangleBorder(
@@ -131,13 +166,58 @@ class _EditProfilePageState extends State<EditProfilePage> {
           ),
         ),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        iconSize: 30,
+        backgroundColor: AppColors.darkpurple,
+        selectedItemColor: AppColors.peachpink,
+        unselectedItemColor: Colors.white,
+        type: BottomNavigationBarType.fixed,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
+          BottomNavigationBarItem(icon: Icon(Icons.add),label: "Create"),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite_border_outlined), label: "Notifications"),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+        ],
+        currentIndex: _selectedIndex,
+
+        onTap: _onItemTapped,
+      ),
     );
   }
 
   Widget buildTextField(
-      String labelText, String placeholder) {
-        return Padding(
+      String labelText, String placeholder, bool isPasswordTextField) {
+    return Padding(
       padding: const EdgeInsets.only(bottom: 35.0),
+      child: TextField(
+        obscureText: isPasswordTextField ? showPassword : false,
+        decoration: InputDecoration(
+            suffixIcon: isPasswordTextField
+                ? IconButton(
+              onPressed: () {
+                setState(() {
+                  showPassword = !showPassword;
+                });
+              },
+              icon: Icon(
+                Icons.remove_red_eye,
+                color: Colors.grey,
+              ),
+            )
+                : null,
+            contentPadding: EdgeInsets.only(bottom: 3),
+            labelText: labelText,
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            hintText: placeholder,
+            hintStyle: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            )),
+      ),
     );
   }
 }
