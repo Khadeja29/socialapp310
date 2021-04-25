@@ -7,15 +7,13 @@ import 'package:socialapp310/utils/color.dart';
 import 'package:socialapp310/utils/styles.dart';
 import 'package:socialapp310/utils/dimension.dart';
 
-
-
 class ActivityScreen extends StatefulWidget {
   @override
   _ActivityScreenState createState() => _ActivityScreenState();
 }
 
 class _ActivityScreenState extends State<ActivityScreen> {
-  int _selectedIndex = 3;//notif page initial index is 3
+  int _selectedIndex = 3; //notif page initial index is 3
   void _onItemTapped(int index) {
     setState(() {
       print(index);
@@ -26,6 +24,17 @@ class _ActivityScreenState extends State<ActivityScreen> {
 
       //TODO: if index 0 push homepage, if index 1 push search page, if index 2 push create page,
       //TODO: if index 3 nothing happens, if index 4 push profile page
+
+      if (_selectedIndex == 0) {
+        Navigator.pushReplacementNamed(context, '/homefeed');
+      } else if (_selectedIndex == 1) {
+        Navigator.pushReplacementNamed(context, '/search');
+      } else if (_selectedIndex == 3) {
+        Navigator.pushReplacementNamed(context, '/notifications');
+      } else if (_selectedIndex == 4) {
+        Navigator.pushReplacementNamed(context, '/profile');
+      } //TODO: if index 3 push notif page, if index 4 push profile page
+
     });
   }
   @override
@@ -65,11 +74,8 @@ class _ActivityScreenState extends State<ActivityScreen> {
           BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
         ],
         currentIndex: _selectedIndex,
-
         onTap: _onItemTapped,
       ),
-      );
+    );
   }
 }
-
-
