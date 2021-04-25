@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:socialapp310/utils/color.dart';
 import 'package:socialapp310/utils/styles.dart';
 import 'package:socialapp310/utils/dimension.dart';
-import 'package:socialapp310/routes/homefeed/HomeFeed.dart';
 
 class SettingsUI extends StatelessWidget {
   @override
@@ -23,6 +22,7 @@ class FinishSignupPage extends StatefulWidget {
 class _FinishSignupPageState extends State<FinishSignupPage> {
   bool switchValue = false;
   String bio = "";
+  bool private = false;
 
   void onChangedSwitchValue(bool value) {
     setState(() {
@@ -46,13 +46,13 @@ class _FinishSignupPageState extends State<FinishSignupPage> {
             Navigator.of(context).pop();
           },
         ),
-          title: Container(
-            width:280,
-            child: Text(
-                'Complete Sign Up',
-               style: kAppBarTitleTextStyle, textAlign: TextAlign.center,
-               ),
+        title: Container(
+          width:280,
+          child: Text(
+            'Complete Sign Up',
+            style: kAppBarTitleTextStyle, textAlign: TextAlign.center,
           ),
+        ),
 
       ),
       body: Container(
@@ -112,7 +112,7 @@ class _FinishSignupPageState extends State<FinishSignupPage> {
                       fillColor: AppColors.lightgrey,
                       contentPadding: const EdgeInsets.symmetric(horizontal: 40.0),
                       filled: true,
-                      hintText: 'Bio:',
+                      hintText: 'Enter your bio here',
                       //labelText: 'username',
                       labelStyle: kLabelLightTextStyle,
                       border: OutlineInputBorder(
@@ -121,7 +121,6 @@ class _FinishSignupPageState extends State<FinishSignupPage> {
                       ),
                     ),
                     keyboardType: TextInputType.text,
-                    obscureText: true,
                     enableSuggestions: false,
                     autocorrect: false,
 
@@ -131,6 +130,21 @@ class _FinishSignupPageState extends State<FinishSignupPage> {
 
                   ),
                 ),
+              ),
+              Row(
+                children: [
+                  Checkbox(
+                    value: private,
+                    activeColor: AppColors.darkgrey,
+                    onChanged: (value) {
+                      setState(() {
+                        private = value;
+                      });
+                    },
+                  ),
+                  Text("Make account private"),
+                  Spacer()
+                ],
               ),
 
 
@@ -158,7 +172,7 @@ class _FinishSignupPageState extends State<FinishSignupPage> {
                       backgroundColor: AppColors.darkpurple,
                     ),
                     onPressed: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => HomeFeed()));
+                      Navigator.pushNamed(context, '/home');
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 30),
