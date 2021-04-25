@@ -10,6 +10,8 @@ import 'package:socialapp310/routes/profile/profilewidget.dart';
 
 import 'package:socialapp310/utils/color.dart';
 
+import 'editprofile.dart';
+
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key key}) : super(key: key);
 
@@ -28,12 +30,20 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
   TabController _controller;
   String _biodata =profuser.bio;
 
-  int _selectedIndex = 0;
+  int _selectedIndex = 4;
   void _onItemTapped(int index) {
     setState(() {
       print(index);
       _selectedIndex = index;//TODO: if index 0 nothing happens, if index 1 push search page, if index 2 push create page,
-      //TODO: if index 3 push notif page, if index 4 push profile page
+      if (_selectedIndex == 0) {
+        Navigator.pushReplacementNamed(context, '/homefeed');
+      } else if (_selectedIndex == 1) {
+        Navigator.pushReplacementNamed(context, '/search');
+      } else if (_selectedIndex == 3) {
+        Navigator.pushReplacementNamed(context, '/notifications');
+      } else if (_selectedIndex == 4) {
+        Navigator.pushReplacementNamed(context, '/profile');
+      } //TODO: if index 3 push notif page, if index 4 push profile page
     });
   }
 
@@ -80,7 +90,7 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
             Icons.article_outlined,
             color: Colors.white,
           ),
-          onPressed: () {},
+          onPressed: () => Navigator.pushNamed(context, "/editprofile")
         ),
         profileStats: profileStats(screen: _screen, color: Colors.white, post: _postnum, followers: _followers, following: _following, context: context),
         bio: bio(name: _name, biodata:_biodata),

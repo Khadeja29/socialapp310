@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:socialapp310/utils/color.dart';
 import 'package:socialapp310/utils/styles.dart';
 import 'package:socialapp310/utils/dimension.dart';
-import 'package:socialapp310/routes/homefeed/HomeFeed.dart';
+import 'homefeed/HomeFeed.dart';
 
 class SettingsUI extends StatelessWidget {
   @override
@@ -23,6 +23,7 @@ class FinishSignupPage extends StatefulWidget {
 class _FinishSignupPageState extends State<FinishSignupPage> {
   bool switchValue = false;
   String bio = "";
+  bool private = false;
 
   void onChangedSwitchValue(bool value) {
     setState(() {
@@ -114,7 +115,7 @@ class _FinishSignupPageState extends State<FinishSignupPage> {
                       contentPadding:
                           const EdgeInsets.symmetric(horizontal: 40.0),
                       filled: true,
-                      hintText: 'Bio:',
+                      hintText: 'Enter your bio here',
                       //labelText: 'username',
                       labelStyle: kLabelLightTextStyle,
                       border: OutlineInputBorder(
@@ -123,7 +124,6 @@ class _FinishSignupPageState extends State<FinishSignupPage> {
                       ),
                     ),
                     keyboardType: TextInputType.text,
-                    obscureText: true,
                     enableSuggestions: false,
                     autocorrect: false,
                     onSaved: (String value) {
@@ -131,6 +131,21 @@ class _FinishSignupPageState extends State<FinishSignupPage> {
                     },
                   ),
                 ),
+              ),
+              Row(
+                children: [
+                  Checkbox(
+                    value: private,
+                    activeColor: AppColors.darkgrey,
+                    onChanged: (value) {
+                      setState(() {
+                        private = value;
+                      });
+                    },
+                  ),
+                  Text("Make account private"),
+                  Spacer()
+                ],
               ),
 
               /*Column(
