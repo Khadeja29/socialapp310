@@ -30,16 +30,16 @@ class searchState extends State<Search> {
       print(index);
       _selectedIndex = index;//TODO: if index 0 nothing happens, if index 1 push search page, if index 2 push create page,
       if (_selectedIndex == 0){
-        Navigator.pushNamed(context, '/homefeed');
+        Navigator.pushReplacementNamed(context, '/homefeed');
       }
       else if (_selectedIndex == 1){
-        Navigator.pushNamed(context, '/search');
+        Navigator.pushReplacementNamed(context, '/search');
       }
       else if (_selectedIndex == 3){
-        Navigator.pushNamed(context, '/notifications');
+        Navigator.pushReplacementNamed(context, '/notifications');
       }
       else if (_selectedIndex == 4){
-        Navigator.pushNamed(context, '/profile');
+        Navigator.pushReplacementNamed(context, '/profile');
       }//TODO: if index 3 push notif page, if index 4 push profile page
     });
   }
@@ -139,19 +139,39 @@ class searchState extends State<Search> {
   }
 
   Widget locationSearchDisplay(){
-    return ListView.builder(
-      itemCount: post_list.length,
-      // ignore: missing_return
-      itemBuilder: (context, index) {
-        //final choiceIdx = choice.index;
-        if (choiceIdx == 0){
-          if (post_list[index].username.toLowerCase().contains(query.toLowerCase())){
-            final product = post_list[index];
-            return buildProductUser(product);
-          }else
-            return Container();
-        }
-      },
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          StaggeredGridView.countBuilder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            crossAxisCount: 3,
+            itemCount: post_list.length,
+            staggeredTileBuilder: (index) => StaggeredTile.count(1 , 1 ),
+            itemBuilder: (context, index) {
+              if (post_list.elementAt(index).loc.loc_name .toLowerCase().contains(query.toLowerCase())){
+                return Container(
+                  padding:  EdgeInsets.all(0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(0),
+                    child: Image(
+                      fit: BoxFit.cover,
+                      image:
+                      AssetImage(post_list.elementAt(index).ImageUrlPost),
+                    ),
+                  ),
+                );
+              }else
+                return Container();
+            },
+            crossAxisSpacing: 2,
+            mainAxisSpacing: 2,
+          ),
+        ],
+      ),
     );
   }
 
@@ -204,7 +224,7 @@ class searchState extends State<Search> {
     }else{
       final postsAll = posts.where((post) {
         final usernameLower = post.username.toLowerCase();
-        final locationLower = post.location.toLowerCase();
+        final locationLower = post.loc.loc_name.toLowerCase();
         final postsLower = post.caption.toLowerCase();
         final searchLower = query.toLowerCase();
         return usernameLower.contains(searchLower) ||

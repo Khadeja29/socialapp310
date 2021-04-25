@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:socialapp310/models/post.dart';
 import 'package:socialapp310/routes/homefeed/postCard.dart';
 import 'package:socialapp310/utils/color.dart';
 import 'package:socialapp310/utils/styles.dart';
-import 'package:socialapp310/models/post.dart';
+import 'package:socialapp310/routes/notifications/notifications.dart';
 
 
 class HomeFeed extends StatefulWidget {
@@ -11,27 +12,23 @@ class HomeFeed extends StatefulWidget {
 }
 //to connect to main use Function '/someroutename': (context) => HomeFeed(),
 class _TestPostState extends State {
-  Post post = Post(username: "Generic Name",location: "Some Location", likes: 100, ImageUrlAvatar: "assets/Dog/cutegolden.jpg", reposts: 20,
-    ImageUrlPost: "assets/Dog/index.jpg", caption: "This is a generic sentence.This is a generic sentence.This is a generic sentence.", date: "April 17 2021", comments: 100);
-
-  List<Post> posts = [Post(username: "Generic Name",location: "Some Location", likes: 15, ImageUrlAvatar: "assets/Dog/another.jpg", reposts: 20,
-  ImageUrlPost: "assets/Dog/scenicgolden.jpg", caption: "This is a generic sentence.This is a generic sentence.This is a generic sentence.", date: "April 17 2021", comments: 20),
-  Post(username: "Generic Name",location: "Some Location", likes: 100, ImageUrlAvatar: "assets/Dog/last.jpg", reposts: 58,
-  ImageUrlPost: "assets/Dog/doglifting.png", caption: "This is a generic sentence.This is a generic sentence.This is a generic sentence.", date: "April 17 2021", comments: 30),
-  Post(username: "Generic Name",location: "Some Location", likes: 235, ImageUrlAvatar: "assets/Dog/cutegolden.jpg", reposts: 62,
-  ImageUrlPost: "assets/Dog/dogmask.jpg", caption: "This is a generic sentence.This is a generic sentence.This is a generic sentence.", date: "April 17 2021", comments: 100),
-  Post(username: "Generic Name",location: "Some Location", likes: 1880, ImageUrlAvatar: "assets/Dog/cuteshiba.png", reposts: 108,
-  ImageUrlPost: "assets/Dog/hungrydog.jpg", caption: "This is a generic sentence.This is a generic sentence.This is a generic sentence.", date: "April 17 2021", comments: 2),
-    Post(username: "Generic Name",location: "Some Location", likes: 10000, ImageUrlAvatar: "assets/Dog/cutepug.jpg", reposts: 50,
-        ImageUrlPost: "assets/Dog/husky.jpg", caption: "This is a generic sentence.This is a generic sentence.This is a generic sentence.", date: "April 17 2021", comments: 0)];
 
   int _selectedIndex = 0;
   void _onItemTapped(int index) {
     setState(() {
-     print(index);
+      print(index);
       _selectedIndex = index;//TODO: if index 0 nothing happens, if index 1 push search page, if index 2 push create page,
-      if (_selectedIndex == 1){
-        Navigator.pushNamed(context, '/search');
+      if (_selectedIndex == 0){
+        Navigator.pushReplacementNamed(context, '/homefeed');
+      }
+      else if (_selectedIndex == 1){
+        Navigator.pushReplacementNamed(context, '/search');
+      }
+      else if (_selectedIndex == 3){
+        Navigator.pushReplacementNamed(context, '/notifications');
+      }
+      else if (_selectedIndex == 4){
+        Navigator.pushReplacementNamed(context, '/profile');
       }//TODO: if index 3 push notif page, if index 4 push profile page
     });
   }
@@ -63,6 +60,7 @@ class _TestPostState extends State {
 
       body: ListView(
         children: posts.map((post) => PostCard(post: post)).toList(),
+
       ),
       bottomNavigationBar: BottomNavigationBar(
         iconSize: 30,

@@ -20,113 +20,111 @@ class _PostCardState extends State<PostCard> {
     return Center(
       child: Card(
 
-          margin: EdgeInsets.fromLTRB(0, 4.0, 0.0, 4.0),
-          child: Padding(
-            padding: EdgeInsets.all(12.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      flex:1,
-                      child: CircleAvatar(
-                        backgroundImage: AssetImage(widget.post.ImageUrlAvatar),
-                        radius: 30,
-                      ),
+        margin: EdgeInsets.fromLTRB(0, 4.0, 0.0, 4.0),
+        child: Padding(
+          padding: EdgeInsets.all(12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    flex:1,
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage(widget.post.ImageUrlAvatar),
+                      radius: 30,
                     ),
-                    SizedBox(width: 10,),
-                    Expanded(
-                      flex: 7,
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                  ),
+                  SizedBox(width: 10,),
+                  Expanded(
+                    flex: 7,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        RichText(
+                          text: TextSpan(
+                            text: "${widget.post.username}",
+
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () => print('Click on username'),//TODO: Push user profile
+                            style: TextStyle(
+                                color: AppColors.darkpurple,
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.w400,
+                                letterSpacing: -0.7,
+                                fontFamily: 'OpenSansCondensed-Bold'
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Row(
                           children: <Widget>[
+                            Icon(
+                              Icons.location_on_rounded,
+                              size: 17.0,
+                              color: Colors.redAccent,
+                            ),
                             RichText(
                               text: TextSpan(
-                                text: "${widget.post.username}",
-
+                                text: "${widget.post.loc.loc_name}",
                                 recognizer: TapGestureRecognizer()
-                                ..onTap = () => print('Click on username'),//TODO: Push user profile
+                                  ..onTap = () => print('Click on location'),//TODO: Push user profile
                                 style: TextStyle(
-                                    color: AppColors.darkpurple,
-                                    fontSize: 20.0,
+                                    color: Colors.lightBlue,
+                                    fontSize: 13.0,
                                     fontWeight: FontWeight.w400,
-                                    letterSpacing: -0.7,
+                                    letterSpacing: -0.4,
                                     fontFamily: 'OpenSansCondensed-Bold'
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Row(
-                              children: <Widget>[
-                                Icon(
-                                  Icons.location_on_rounded,
-                                  size: 17.0,
-                                  color: Colors.redAccent,
-                                ),
-                                RichText(
-                                  text: TextSpan(
-                                  text: "${widget.post.location}",
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () => print('Click on location'),//TODO: Push user profile
-                                  style: TextStyle(
-                                      color: Colors.lightBlue,
-                                      fontSize: 13.0,
-                                      fontWeight: FontWeight.w400,
-                                      letterSpacing: -0.4,
-                                      fontFamily: 'OpenSansCondensed-Bold'
-                                  ),
-                                  ),
-                                ),
 
-                              ],
-                            ),
                           ],
-                      ),
-                    )
-                  ],
-                ),
-                Divider(
-                  color: AppColors.lightgrey,
-                  height: 5,
-                  thickness: 1.0,
-                ),
-                GestureDetector(
-                  child: Hero(
-                    tag: '${widget.post.ImageUrlPost}',
-                    child: Image(
-                      image: AssetImage(widget.post.ImageUrlPost) ,
-
+                        ),
+                      ],
                     ),
-
+                  )
+                ],
+              ),
+              Divider(
+                color: AppColors.lightgrey,
+                height: 5,
+                thickness: 1.0,
+              ),
+              GestureDetector(
+                child: Hero(
+                  tag: '${widget.post.ImageUrlPost}',
+                  child: Image(
+                    image: AssetImage(widget.post.ImageUrlPost) ,
                   ),
-                  onTap: () {
+                ),
+                onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (_) {
-                  return DetailScreen(ImageUrlPost:widget.post.ImageUrlPost ,);
+                    return DetailScreen(ImageUrlPost:widget.post.ImageUrlPost ,);
                   }));
-                  },
+                },
+              ),
+              Divider(
+                color: AppColors.lightgrey,
+                height: 10,
+                thickness: 1.0,
+              ),
+              Text(
+                "${widget.post.caption}",
+                style: TextStyle(
+                    color: Colors.black54,
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 0,
+                    fontFamily: 'OpenSansCondensed-Bold'
                 ),
-                Divider(
-                  color: AppColors.lightgrey,
-                  height: 10,
-                  thickness: 1.0,
-                ),
-                Text(
-                  "${widget.post.caption}",
-                  style: TextStyle(
-                      color: Colors.black54,
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0,
-                      fontFamily: 'OpenSansCondensed-Bold'
-                  ),
-                ),
-                SizedBox(height: 5),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              ),
+              SizedBox(height: 5),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Container(
                       child: Column(
@@ -170,36 +168,36 @@ class _PostCardState extends State<PostCard> {
                           },
                         ),
 
-                    IconButton(
-                      padding: EdgeInsets.all(0.0),
+                        IconButton(
+                          padding: EdgeInsets.all(0.0),
 
-                      splashRadius: 25,
-                      onPressed: (){},
-                      icon: Icon(
-                        Icons.chat_bubble_outline,
-                        size: 30.0,
-                        color: Colors.black54,
-                      ),
-                    ) ,
-                    IconButton(
-                      padding: EdgeInsets.all(0.0),
+                          splashRadius: 25,
+                          onPressed: (){},
+                          icon: Icon(
+                            Icons.chat_bubble_outline,
+                            size: 30.0,
+                            color: Colors.black54,
+                          ),
+                        ) ,
+                        IconButton(
+                          padding: EdgeInsets.all(0.0),
 
-                      splashRadius: 25,
-                      onPressed: (){},
-                      icon: Icon(
-                        Icons.redo,
-                        size: 30.0,
-                        color: Colors.black54,
-                      ),
-                    ) ,
+                          splashRadius: 25,
+                          onPressed: (){},
+                          icon: Icon(
+                            Icons.redo,
+                            size: 30.0,
+                            color: Colors.black54,
+                          ),
+                        ) ,
                       ],
                     ),
                   ]
-                ),
+              ),
 
-              ],
-            ),
+            ],
           ),
+        ),
       ),
     );
   }
@@ -211,15 +209,15 @@ class DetailScreen extends StatelessWidget {
 
   DetailScreen({  this.ImageUrlPost });
   Matrix4 initialScale = Matrix4(1 , 0 ,0 ,0,
-                                  0, 1.0 , 0, 0,
-                                0, 0, 1, 0,
-                                0 ,0 ,0 ,1);
+      0, 1.0 , 0, 0,
+      0, 0, 1, 0,
+      0 ,0 ,0 ,1);
   TransformationController _transformationController = TransformationController();
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Scaffold(
-      backgroundColor: AppColors.darkgreyblack,
+        backgroundColor: AppColors.darkgreyblack,
 
         body: Center(
 
@@ -228,7 +226,7 @@ class DetailScreen extends StatelessWidget {
             child: InteractiveViewer(
               clipBehavior: Clip.none,
               panEnabled: true, // Set it to false
-              boundaryMargin: EdgeInsets.all(30),
+              boundaryMargin: EdgeInsets.all(60),
               minScale: 0.33,
               maxScale: 3,
               child: Image(
@@ -247,11 +245,12 @@ class DetailScreen extends StatelessWidget {
           ),
         ),
 
-    ),
-        onTap: () {
-      Navigator.pop(context);
-    },
+      ),
+      onTap: (){
+        Navigator.pop(context);
+      },
+
+
     );
   }
 }
-
