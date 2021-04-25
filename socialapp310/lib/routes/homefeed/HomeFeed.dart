@@ -17,11 +17,11 @@ class _TestPostState extends State {
   void _onItemTapped(int index) {
     setState(() {
       if(index == 3) {
-        Navigator.of(context).pushReplacement(
-            new MaterialPageRoute(builder: (context) => new ActivityScreen()));
+        Navigator.pushReplacementNamed(context, '/notifications');
+         //TODO: if index 0 nothing happens, if index 1 push search page, if index 2 push create page,
+        //TODO: if index 3 push notif page, if index 4 push profile page
       }
-      _selectedIndex = index;//TODO: if index 0 nothing happens, if index 1 push search page, if index 2 push create page,
-      //TODO: if index 3 push notif page, if index 4 push profile page
+      _selectedIndex = index;
     });
   }
 

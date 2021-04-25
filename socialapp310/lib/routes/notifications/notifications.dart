@@ -21,8 +21,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
       print(index);
       _selectedIndex = index;
       if(index == 0) {
-        Navigator.of(context).pushReplacement(
-            new MaterialPageRoute(builder: (context) => new HomeFeed()));
+        Navigator.of(context).pushReplacementNamed('/homefeed');
       }
 
       //TODO: if index 0 push homepage, if index 1 push search page, if index 2 push create page,
