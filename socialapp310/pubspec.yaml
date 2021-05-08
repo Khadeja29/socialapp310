@@ -24,6 +24,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  firebase_core: "^1.1.0"
   email_validator: ^2.0.1
   http: ^0.13.1
   shared_preferences: ^2.0.5

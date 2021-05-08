@@ -11,9 +11,8 @@ import 'package:socialapp310/routes/splashpage.dart';
 import 'package:socialapp310/routes/login.dart';
 import 'package:socialapp310/routes/unknownwelcome.dart';
 import 'package:socialapp310/routes/welcome.dart';
-import 'package:socialapp310/routes/welcomenofirebase.dart';
 
-
+import 'package:socialapp310/routes/welcomeNoFirebase.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,59 +22,41 @@ void main() {
 class MyApp extends StatelessWidget {
 
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: _initialization,
-        builder: (context,snapshot){
-          if(snapshot.hasError){
-            print('Cannot connect to firebase: '+snapshot.error);
-            return MaterialApp(
-                home:WelcomeViewNoFb()
-            );
-          }
-          if(snapshot.connectionState == ConnectionState.done){
-            print('Cannot connect to firebase: '+snapshot.error);
-            return MaterialApp(
-              home: Welcome(),
-              debugShowCheckedModeBanner: false,
-              routes: {
-                '/': (context) => SplashScreen(),
-                '/welcome': (context) => Welcome(),
-                '/login': (context) => Login(),
-                '/signup': (context) => SignUp(),
-                '/signupfinish': (context) => FinishSignupPage(),
-                '/notifications': (context) => ActivityScreen(),
-                '/homefeed': (context) => HomeFeed(),
-                '/profile': (context) => ProfileScreen(),
-                '/search' : (context) => Search(),
-                '/editprofile' : (context) => EditProfilePage(),
-              },
-            );
-          }
-          else {
-            print(snapshot.connectionState);
-            return MaterialApp( home: UnknownWelcomeFB());
-          }
+      future: _initialization,
+      builder: (context, snapshot){
+        print(snapshot.connectionState);
+        if(snapshot.hasError)
+        {
+          print("cannot connect to firebase" + snapshot.error);
+          return MaterialApp(
+              home: WelcomeViewNoFB()
+          );
+        }
+        else if(snapshot.connectionState == ConnectionState.done){
+          return MaterialApp(
+            home: SplashScreen(),
+            routes: {
+              '/welcome': (context) => Welcome(),
+              '/login': (context) => Login(),
+              '/signup': (context) => SignUp(),
+              '/signupfinish': (context) => FinishSignupPage(),
+              '/notifications': (context) => ActivityScreen(),
+              '/homefeed': (context) => HomeFeed(),
+              '/profile': (context) => ProfileScreen(),
+              '/search' : (context) => Search(),
+              '/editprofile' : (context) => EditProfilePage(),
+            },
+          );
+        }
+        return MaterialApp(
+            home: WelcomeViewNoFB()
+        );
+      },
+    );
 
-        });
   }
 }
-
-/*void main() => runApp(MaterialApp(
-
-      debugShowCheckedModeBanner: false,
-      routes: {
-        '/': (context) => SplashScreen(),
-        '/welcome': (context) => Welcome(),
-        '/login': (context) => Login(),
-        '/signup': (context) => SignUp(),
-        '/signupfinish': (context) => FinishSignupPage(),
-        '/notifications': (context) => ActivityScreen(),
-        '/homefeed': (context) => HomeFeed(),
-        '/profile': (context) => ProfileScreen(),
-        '/search' : (context) => Search(),
-        '/editprofile' : (context) => EditProfilePage(),
-      },
-    ));
-*/
