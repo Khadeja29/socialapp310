@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:socialapp310/utils/color.dart';
 import 'package:socialapp310/utils/styles.dart';
 import 'package:socialapp310/utils/dimension.dart';
-import 'package:socialapp310/routes/homefeed/HomeFeed.dart';
+import 'homefeed/HomeFeed.dart';
 
 class SettingsUI extends StatelessWidget {
   @override
@@ -23,6 +23,7 @@ class FinishSignupPage extends StatefulWidget {
 class _FinishSignupPageState extends State<FinishSignupPage> {
   bool switchValue = false;
   String bio = "";
+  bool private = false;
 
   void onChangedSwitchValue(bool value) {
     setState(() {
@@ -40,20 +41,19 @@ class _FinishSignupPageState extends State<FinishSignupPage> {
           icon: Icon(
             Icons.arrow_back,
             color: AppColors.lightgrey,
-
           ),
           onPressed: () {
             Navigator.of(context).pop();
           },
         ),
-          title: Container(
-            width:280,
-            child: Text(
-                'Complete Sign Up',
-               style: kAppBarTitleTextStyle, textAlign: TextAlign.center,
-               ),
+        title: Container(
+          width: 280,
+          child: Text(
+            'Complete Sign Up',
+            style: kAppBarTitleTextStyle,
+            textAlign: TextAlign.center,
           ),
-
+        ),
       ),
       body: Container(
         padding: EdgeInsets.only(left: 16, top: 25, right: 16),
@@ -66,7 +66,10 @@ class _FinishSignupPageState extends State<FinishSignupPage> {
               Text(
                 "Add Profile Picture",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500, color: AppColors.darkpurple ),
+                style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.darkpurple),
               ),
               SizedBox(
                 height: 15,
@@ -102,7 +105,6 @@ class _FinishSignupPageState extends State<FinishSignupPage> {
               SizedBox(
                 height: 35,
               ),
-
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Expanded(
@@ -110,9 +112,10 @@ class _FinishSignupPageState extends State<FinishSignupPage> {
                   child: TextFormField(
                     decoration: InputDecoration(
                       fillColor: AppColors.lightgrey,
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 40.0),
+                      contentPadding:
+                          const EdgeInsets.symmetric(horizontal: 40.0),
                       filled: true,
-                      hintText: 'Bio:',
+                      hintText: 'Enter your bio here',
                       //labelText: 'username',
                       labelStyle: kLabelLightTextStyle,
                       border: OutlineInputBorder(
@@ -121,18 +124,29 @@ class _FinishSignupPageState extends State<FinishSignupPage> {
                       ),
                     ),
                     keyboardType: TextInputType.text,
-                    obscureText: true,
                     enableSuggestions: false,
                     autocorrect: false,
-
                     onSaved: (String value) {
                       bio = value;
                     },
-
                   ),
                 ),
               ),
-
+              Row(
+                children: [
+                  Checkbox(
+                    value: private,
+                    activeColor: AppColors.darkgrey,
+                    onChanged: (value) {
+                      setState(() {
+                        private = value;
+                      });
+                    },
+                  ),
+                  Text("Make account private"),
+                  Spacer()
+                ],
+              ),
 
               /*Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -149,35 +163,31 @@ class _FinishSignupPageState extends State<FinishSignupPage> {
                 child: Container(
                   width: 300,
                   child: OutlinedButton(
-
                     style: OutlinedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(40.0),
-
                       ),
                       backgroundColor: AppColors.darkpurple,
                     ),
                     onPressed: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => HomeFeed()));
-
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => HomeFeed()),
+                          (Route<dynamic> route) => false);
                     },
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 30),
-                      child: Text(
-                          'Finish sign up',
-                          style:  TextStyle(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 12.0, horizontal: 30),
+                      child: Text('Finish sign up',
+                          style: TextStyle(
                               color: AppColors.lightgrey,
                               fontSize: 20.0,
                               letterSpacing: -0.7,
-                              fontFamily: 'OpenSansCondensed-Light'
-                          )
-                      ),
+                              fontFamily: 'OpenSansCondensed-Light')),
                     ),
-
                   ),
                 ),
               ),
-
             ],
           ),
         ),
