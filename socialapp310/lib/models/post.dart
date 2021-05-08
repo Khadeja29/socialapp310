@@ -39,14 +39,14 @@ Post post = Post(
     comments: 100);
 List<Post> posts = [
   Post(
-      username: "Generic Name",
+      username: "Another",
       loc: x,
       likes: 15,
       ImageUrlAvatar: "assets/Dog/another.jpg",
       reposts: 20,
       ImageUrlPost: "assets/Dog/scenicgolden.jpg",
       caption:
-          "This is a generic sentence.This is a generic sentence.This is a generic sentence.",
+          "Cap",
       date: "April 17 2021",
       comments: 20),
   Post(
