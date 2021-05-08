@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
     //print(_seen);
     if (_seen) {
       Navigator.of(context).pushReplacement(
-          new MaterialPageRoute(builder: (context) => new ProfileScreen()));
+          new MaterialPageRoute(builder: (context) => new Welcome()));
     } else {
       await prefs.setBool('_seen', true);
       Navigator.of(context).pushReplacement(
